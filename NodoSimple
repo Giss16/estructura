@@ -1,0 +1,65 @@
+package Listas;
+
+public class NodoSimple {
+
+    private Node head;
+
+    // Nodo interno para la lista simple
+    private class Node {
+        int data;
+        Node next;
+
+        Node(int data) {
+            this.data = data;
+            this.next = null;
+        }
+    }
+
+    // Método para acceder al valor en una posición específica
+    public int access(int index) {
+        Node current = head;
+        int count = 0;
+
+        while (current != null) {
+            if (count == index) {
+                return current.data;
+            }
+            count++;
+            current = current.next;
+        }
+        return -1; // Valor especial para indicar índice fuera de rango
+    }
+
+    // Método para insertar un nuevo nodo al final
+    public void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Node current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = newNode;
+    }
+
+    // Método para eliminar un nodo con un valor específico
+    public void delete(int data) {
+        if (head == null) return;
+
+        if (head.data == data) {
+            head = head.next;
+            return;
+        }
+
+        Node current = head;
+        while (current.next != null && current.next.data != data) {
+            current = current.next;
+        }
+
+        if (current.next != null) {
+            current.next = current.next.next;
+        }
+    }
+}
